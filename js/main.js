@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const containerWidth = document.querySelector('.container').clientWidth;
         const advantageWidth = document.querySelector('.advantages__list-item').clientWidth;
         const visibleAdvantagesNumber = Math.round(containerWidth / advantageWidth);
-        console.log(visibleAdvantagesNumber)
+        
         if(counter !== 5 - visibleAdvantagesNumber){
             ++counter
             advantagesList.style.transform = `translateX(-${advantageWidth * counter}px)`;
@@ -28,9 +28,13 @@ window.addEventListener('DOMContentLoaded', () => {
     advantagesNextBtn.addEventListener('click', () => swipeAdvantegesNext());
     advantagesPrevBtn.addEventListener('click', () => swipeAdvantegesPrev());
 
+    const thresholdValue = window.innerWidth > 1340 ? 0.4 : 0.2;
+
+    console.log(thresholdValue)
+
     const options = {
         rootMargin: '0px',
-        threshold: 0
+        threshold: thresholdValue
     };
 
     const sectionTopAnim = function(entries, observer) {
@@ -62,16 +66,38 @@ window.addEventListener('DOMContentLoaded', () => {
 
         });
     };
+
+    const sectionProductionAnim = function(entries, observer) {
+        entries.forEach((entry) => {
+
+            const { target, isIntersecting } = entry;
+
+            if(isIntersecting){
+                target.classList.add('visible')
+
+                setTimeout(() => {
+                    document.querySelectorAll('.production__list-item-icon').forEach((item) => {
+                        item.classList.add('visible')
+                    })
+                }, 900)
+            }
+
+        });
+    };
     
     const observer = new IntersectionObserver( sectionTopAnim, options );
     const observer2 = new IntersectionObserver( sectionAnim, options );
+    const observer3 = new IntersectionObserver( sectionProductionAnim, options );
     
     const sectionTop = document.querySelector('.section-top');
     const sectionSchema = document.querySelector('.section-schema');
     const sectionProducts = document.querySelector('.section-products');
+    const sectionRelation = document.querySelector('.section-relation');
+    const sectionProduction = document.querySelector('.section-production');
 
-    observer.observe(sectionTop);
+    observer.observe(sectionTop);   
     observer2.observe(sectionSchema);
-    observer2.observe(sectionProducts);
-
+    observer2.observe(sectionProducts); 
+    observer2.observe(sectionRelation); 
+    observer3.observe(sectionProduction);
 });
