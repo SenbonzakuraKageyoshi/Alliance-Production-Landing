@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', () => {
-
     let counter = 0;
 
     const advantagesPrevBtn = document.querySelector('.advantages__button.prev');
@@ -100,4 +99,26 @@ window.addEventListener('DOMContentLoaded', () => {
     observer2.observe(sectionProducts); 
     observer2.observe(sectionRelation); 
     observer3.observe(sectionProduction);
+
+    const openMenuBtn = document.querySelector('.menu-btn.open');
+    const closeMenuBtn = document.querySelector('.menu-btn.close');
+
+    openMenuBtn.addEventListener('click', () => {
+        document.querySelector('.header').classList.add('active')
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+        document.querySelector('.header').classList.remove('active')
+    });
+
+    const scrollToSection = ({ target }) => {
+        const sectionName = target.getAttribute('data-to');
+        document.querySelector(`.${sectionName}`).scrollIntoView({behavior: 'smooth'});
+        
+        if(document.querySelector('.header.active')){
+            document.querySelector('.header.active').classList.remove('active');
+        }
+    }
+
+    document.querySelectorAll('.nav__list-link').forEach((item) => item.addEventListener('click', (e) => scrollToSection(e)))
 });
