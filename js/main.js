@@ -3,13 +3,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const advantagesPrevBtn = document.querySelector('.advantages__button.prev');
     const advantagesNextBtn = document.querySelector('.advantages__button.next');
-    const advantagesList = document.querySelector('.advantages__list');
+    const advantagesList = document.querySelector('.advantages__list');    
 
     const swipeAdvantegesNext = () => {
-        const containerWidth = document.querySelector('.container').clientWidth;
+        const containerWidth = document.querySelector('.advantages__list').clientWidth;
         const advantageWidth = document.querySelector('.advantages__list-item').clientWidth;
         const visibleAdvantagesNumber = Math.round(containerWidth / advantageWidth);
-        
         if(counter !== 5 - visibleAdvantagesNumber){
             ++counter
             advantagesList.style.transform = `translateX(-${advantageWidth * counter}px)`;
