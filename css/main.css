@@ -46,6 +46,22 @@ p, button, a{
 
 .nav__list-item{
     cursor: pointer;
+    position: relative;
+}
+
+.nav__list-item:before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    height: 3px;
+    width: 0%;
+    left: 0;
+    transition: 0.4s;
+    background: #fff;
+}
+
+.nav__list-item:hover::before{
+    width: 100%;
 }
 
 .nav__list-item:not(:first-child){
@@ -75,6 +91,10 @@ p, button, a{
 
 .number-icon{
     margin-right: 14px;
+}
+
+button{
+    cursor: pointer;
 }
 
 .contact-btn{
